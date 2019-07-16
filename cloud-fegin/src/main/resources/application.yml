@@ -1,0 +1,24 @@
+server:
+  port: 8689
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka,http://eureka03:8688/wangchen/eureka/eureka
+
+spring:
+  application:
+    name: service-fegin
+
+feign:
+  hystrix:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'hystrix.stream'
+
+
+

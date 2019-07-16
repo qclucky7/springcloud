@@ -1,0 +1,17 @@
+server:
+  port: 8686
+  servlet:
+    context-path: /wangchen/eureka/
+eureka:
+  instance:
+    hostname: eureka01
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eureka02:8687/wangchen/eureka/eureka,http://eureka03:8688/wangchen/eureka/eureka
+spring:
+  security:
+    user:
+      name: 123
+      password: 123

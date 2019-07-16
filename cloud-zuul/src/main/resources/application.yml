@@ -1,0 +1,20 @@
+server:
+  port: 9000
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka,http://eureka03:8688/wangchen/eureka/eureka
+
+spring:
+  application:
+    name: zuul
+
+zuul:
+  ignored-services: service-fegin
+  prefix: /qingchen
+  routes:
+    fegin-api:
+      serviceId: service-fegin
+      path: /service-fegin/**

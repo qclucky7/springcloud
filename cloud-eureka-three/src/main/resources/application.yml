@@ -1,0 +1,13 @@
+
+server:
+  port: 8688
+  servlet:
+    context-path: /wangchen/eureka/
+eureka:
+  instance:
+    hostname: eureka03
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka
