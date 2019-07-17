@@ -1,0 +1,20 @@
+
+server:
+  port: 8790
+
+spring:
+  application:
+    name: cloud-client-one
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka,http://eureka03:8688/wangchen/eureka/eureka
+  instance:
+    prefer-ip-address: true
+
+
+
+
+
+
