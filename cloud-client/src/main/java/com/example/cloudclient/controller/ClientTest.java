@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/test1")
-public class test {
+@RequestMapping(value = "/client1")
+public class ClientTest {
 
-    @GetMapping(value = "/test")
+    @GetMapping(value = "/getData")
     public String getData(){
 
-        return "client-data";
+        return "client1-data";
     }
 
-    @GetMapping(value = "/test2")
+    @GetMapping(value = "/getData2")
     public String getData2(){
 
-        return "client-data2";
+        return "client1-data2";
     }
 
 

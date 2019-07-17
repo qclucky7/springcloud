@@ -2,4 +2,27 @@ server:
   port: 9001
 spring:
   application:
-    name: hystrix-dashboard
+    name: service-turbine
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka,http://eureka03:8688/wangchen/eureka/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+
+turbine:
+  app-config: cloud-client-one,cloud-client-two,service-fegin
+  aggregator:
+    clusterConfig: default
+  clusterNameExpression: new String("default")
+  combine-host: true
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
