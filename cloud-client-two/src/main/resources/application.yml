@@ -1,0 +1,19 @@
+
+server:
+  port: 8785
+
+spring:
+  application:
+    name: cloud-client-two
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka,http://eureka03:8688/wangchen/eureka/eureka
+  instance:
+    prefer-ip-address: true
+
+
+
+
+
