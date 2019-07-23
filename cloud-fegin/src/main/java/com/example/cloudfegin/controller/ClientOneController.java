@@ -3,6 +3,7 @@ package com.example.cloudfegin.controller;
 import com.example.cloudfegin.fallback.HystrixClientOneService;
 import com.example.cloudfegin.feginclient.ClientOneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/client1")
 public class ClientOneController {
+
 
     @Autowired
     private ClientOneService clientOneService;

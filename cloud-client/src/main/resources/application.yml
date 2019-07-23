@@ -5,6 +5,58 @@ server:
 spring:
   application:
     name: cloud-client-one
+  datasource:
+    name: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/wangchen?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+      username: root
+      password: 123456
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  cache:
+    type: redis
+  redis:
+    # 连接工厂使用的数据库索引
+    database: 1
+    # Redis服务器主机
+    host: 127.0.0.1
+    # 登录redis服务器的密码
+    password:
+    # redis服务器端口
+    port: 6379
+    # 数据库连接超时时间 需要指明单位
+    timeout: 1s
+    jedis:
+      pool:
+        # 池在给定时间可以分配的最大连接数。使用负值无限制
+        max-active: 1000
+        # 池中“空闲”连接的最大数量。使用负值表示无限数量的空闲连接。
+        max-idle: 500
+        # 目标为保持在池中的最小空闲连接数。这个设置只有在正面的情况下才有效果。
+        min-idle: 100
+        # # 等待可用连接的最大时间，负数为不限制
+        max-wait: 500ms
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.model
 
 eureka:
   client:
@@ -12,7 +64,6 @@ eureka:
       defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka,http://eureka03:8688/wangchen/eureka/eureka
   instance:
     prefer-ip-address: true
-
 
 
 
