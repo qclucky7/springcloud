@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/client2")
 public class ClientTwoTest {
 
-    @GetMapping(value = "/getData")
+    @GetMapping(value = "/getClient2Data")
     public String getData(){
 
         return "client2-data";
     }
 
-    @GetMapping(value = "/getData2")
+    @GetMapping(value = "/getClient2Data2")
     public String getData2(){
 
         return "client2-data2";

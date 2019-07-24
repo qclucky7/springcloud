@@ -8,9 +8,14 @@ eureka:
 
 spring:
   application:
-    name: service-fegin
-
+    name: service-fegin-sentinel
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
 feign:
+  sentinel:
+    enabled: true
   hystrix:
     enabled: true
 
@@ -19,6 +24,4 @@ management:
     web:
       exposure:
         include: '*'
-
-
 

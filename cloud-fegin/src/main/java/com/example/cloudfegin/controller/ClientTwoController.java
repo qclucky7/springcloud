@@ -1,7 +1,7 @@
 package com.example.cloudfegin.controller;
 
-import com.example.cloudfegin.fallback.HystrixClientOneService;
-import com.example.cloudfegin.fallback.HystrixClientTwoService;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.example.cloudfegin.BlockHander;
 import com.example.cloudfegin.feginclient.ClientTwoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  */
 @RestController
-@RequestMapping(value = "/client2")
+@RequestMapping(value = "/client")
 public class ClientTwoController {
 
     @Autowired
     private ClientTwoService clientTwoService;
+
 
     @GetMapping(value = "/getData")
     public String test(){
@@ -29,6 +30,7 @@ public class ClientTwoController {
     }
 
     @GetMapping(value = "/getData2")
+    @SentinelResource(blockHandlerClass = BlockHander.class)
     public String test2(){
 
         return clientTwoService.getData2();
