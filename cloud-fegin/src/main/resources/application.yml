@@ -8,11 +8,14 @@ eureka:
 
 spring:
   application:
-    name: service-fegin-sentinel
+    name: service-fegin
   cloud:
     sentinel:
       transport:
         dashboard: localhost:8080
+        port: 8689
+      servlet:
+        block-page: https://www.baidu.com/
 feign:
   sentinel:
     enabled: true
