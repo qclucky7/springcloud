@@ -1,6 +1,6 @@
 package com.example.cloudclienttwo.controller;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/client2")
 public class ClientTwoTest {
 
-    @SentinelResource(value = "getData")
+
     @GetMapping(value = "/getClient2Data")
     public String getData(){
 
         return "client2-data";
     }
-    @SentinelResource(value = "getData2")
+
     @GetMapping(value = "/getClient2Data2")
     public String getData2(){
 

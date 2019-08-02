@@ -1,7 +1,5 @@
 package com.example.cloudfegin.controller;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.example.cloudfegin.BlockHander;
 import com.example.cloudfegin.feginclient.ClientTwoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +24,12 @@ public class ClientTwoController {
     private ClientTwoService clientTwoService;
 
     @GetMapping(value = "/getData")
-    public String test(){
-
+    public String test() {
         return clientTwoService.getData();
     }
 
     @GetMapping(value = "/getData2")
-    public String test2(){
-
+    public String test2() {
         log.info("测试@Slf4j");
         return clientTwoService.getData2();
     }

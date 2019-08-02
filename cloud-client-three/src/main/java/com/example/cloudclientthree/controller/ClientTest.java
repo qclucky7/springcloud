@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/client1")
+@RequestMapping(value = "/client")
 public class ClientTest {
 
     @GetMapping(value = "/getData")

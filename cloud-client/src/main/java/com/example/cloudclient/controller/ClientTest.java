@@ -2,6 +2,7 @@ package com.example.cloudclient.controller;
 
 import com.example.cloudclient.model.User;
 import com.example.cloudclient.service.DataTest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,6 +20,7 @@ import java.util.List;
  * @Version 1.0
  */
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/client1")
 public class ClientTest {
@@ -34,6 +36,10 @@ public class ClientTest {
 
         List<User> userList = dataTest.getData();
 
+        if (userList == null) {
+            log.info("userList is null");
+        }
+
         return userList;
     }
 
@@ -41,14 +47,18 @@ public class ClientTest {
     @CachePut(cacheNames = "user-List", key = "'userList'")
     public List<User> getData2() {
 
-        num = num +1 ;
+        num = num + 1;
 
         List<User> data = dataTest.getData();
 
-        data.stream().forEach(x->{
-            x.setName("小菠萝"+num);
-            x.setAge(new Long(19));
-        });
+        if (data != null) {
+            data.stream().forEach(x -> {
+                x.setName("小菠萝" + num)
+                 .setAge(new Long(19));
+            });
+        } else {
+            log.info("data is null");
+        }
 
         return data;
     }

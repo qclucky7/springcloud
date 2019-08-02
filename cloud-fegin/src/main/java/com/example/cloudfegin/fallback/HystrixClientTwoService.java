@@ -1,5 +1,6 @@
 package com.example.cloudfegin.fallback;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.example.cloudfegin.feginclient.ClientTwoService;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ public class HystrixClientTwoService implements ClientTwoService {
 
     @Override
     public String getData() { return "请求失败"; }
+
 
     @Override
     public String getData2() { return "请求失败"; }
