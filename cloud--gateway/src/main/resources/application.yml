@@ -8,15 +8,25 @@ spring:
   application:
     name: cloud-gateway
   cloud:
+    sentinel:
+      enabled: true #è‡ªåŠ¨åŒ–é…ç½®æ˜¯å¦ç”Ÿæ•ˆ
+      transport:
+        dashboard: localhost:8080
+      scg:
+        fallback:
+          mode: redirect #Spring Cloud Gateway ç†”æ–­åçš„å“åº”æ¨¡å¼(é€‰æ‹© redirect or response)
+          redirect: http://localhost:8989/index.html #Spring Cloud Gateway å“åº”æ¨¡å¼ä¸º 'redirect' æ¨¡å¼å¯¹åº”çš„é‡å®šå‘ URL
+          #content-type: Spring Cloud Gateway å“åº”æ¨¡å¼ä¸º 'response' æ¨¡å¼å¯¹åº”çš„ content-type
+          #mode: Spring Cloud Gateway ç†”æ–­åçš„å“åº”æ¨¡å¼(é€‰æ‹© redirect or response)
+          #response-body: Spring Cloud Gateway å“åº”æ¨¡å¼ä¸º 'response' æ¨¡å¼å¯¹åº”çš„å“åº”å†…å®¹
+          #response-status: Spring Cloud Gateway å“åº”æ¨¡å¼ä¸º 'response' æ¨¡å¼å¯¹åº”çš„å“åº”ç   é»˜è®¤429
     gateway:
-      enabled: true #±íÃ÷gateway¿ªÆô·şÎñ×¢²áºÍ·¢ÏÖµÄ¹¦ÄÜ£¬²¢ÇÒspring cloud gateway×Ô¶¯¸ù¾İ·şÎñ·¢ÏÖÎªÃ¿Ò»¸ö·şÎñ´´½¨ÁËÒ»¸örouter£¬Õâ¸örouter½«ÒÔ·şÎñÃû¿ªÍ·µÄÇëÇóÂ·¾¶×ª·¢µ½¶ÔÓ¦µÄ·şÎñ¡£
       discovery:
         locator:
-          lowerCaseServiceId: true #ÊÇ½«ÇëÇóÂ·¾¶ÉÏµÄ·şÎñÃûÅäÖÃÎªĞ¡Ğ´£¨ÒòÎª·şÎñ×¢²áµÄÊ±ºò£¬Ïò×¢²áÖĞĞÄ×¢²áÊ±½«·şÎñÃû×ª³É´óĞ´µÄÁË£©£¬±ÈÈçÒÔ/service-fegin/*µÄÇëÇóÂ·¾¶±»Â·ÓÉ×ª·¢µ½·şÎñÃûÎªservice-feginµÄ·şÎñÉÏ¡£
-          filters:
-            - StripPrefix=1
+          enabled: true
+          lowerCaseServiceId: true
       routes:
         - id: cloud-client-two
-          uri: http://localhost:8785
+          uri: lb://localhost:8785
           predicates:
             - Path=/cloud-client-two/**

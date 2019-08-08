@@ -9,9 +9,8 @@ spring:
     sentinel:
       transport:
         dashboard: localhost:8080
-        port: 8690
       servlet:
-        block-page: https://www.baidu.com/
+        block-page: http://localhost:8785/index.html
 
 eureka:
   client:

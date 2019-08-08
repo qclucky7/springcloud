@@ -1,3 +1,5 @@
+
+
 server:
   port: 10010
 spring:
@@ -10,4 +12,3 @@ spring:
         dashboard: localhost:8080
       servlet:
         block-page: https://www.baidu.com/
-
