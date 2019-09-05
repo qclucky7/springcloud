@@ -1,0 +1,10 @@
+2019-09-05 10:42:49,088|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|null|1567651368988|10.5.94.32|persist|pub|-1|89afaea18e0b21d9030547687224a24d
+2019-09-05 10:42:49,122|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|null|1567651368988|10.5.94.32|notify|ok|129|10.5.94.32:8848
+2019-09-05 10:42:49,136|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|null|1567651368988|10.5.94.32|dump|ok|148|217
+2019-09-05 10:45:04,124|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|cloud-client-two|1567651368988|pull|ok|135136|10.5.94.32
+2019-09-05 10:45:04,148|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|cloud-client-two|1567651368988|pull|ok|135160|10.5.94.32
+2019-09-05 10:45:14,928|10.5.94.32|cloud-gateway-sentinel|DEFAULT_GROUP|null|cloud-gateway|1567590620000|pull|ok|60894928|10.5.94.32
+2019-09-05 10:49:38,180|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|null|1567651777745|10.5.94.32|persist|pub|-1|0c3aa3e6b04fab752890b90cebde436c
+2019-09-05 10:49:38,189|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|null|1567651777745|10.5.94.32|notify|ok|443|10.5.94.32:8848
+2019-09-05 10:49:38,290|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|null|1567651777745|10.5.94.32|dump|ok|545|433
+2019-09-05 10:49:38,319|10.5.94.32|cloud-client-two-sentinel|DEFAULT_GROUP|null|cloud-client-two|1567651777745|pull|ok|574|10.5.94.32
