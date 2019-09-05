@@ -6,9 +6,22 @@ spring:
   application:
     name: cloud-client-two
   cloud:
+    #nacos:
+      ##使用nacos的配置中心
+      #config:
+        #server-addr: http://10.5.94.32:8848
+        #file-extension: yaml
     sentinel:
       transport:
         dashboard: localhost:8080
+      datasource:
+        ds:
+          nacos:
+            dataId: ${spring.application.name}-sentinel
+            groupId: DEFAULT_GROUP
+            rule-type: flow
+            data-type: json
+            server-addr: http://10.5.94.32:8848
       servlet:
         block-page: http://localhost:8785/index.html
 
@@ -19,6 +32,7 @@ eureka:
   instance:
     prefer-ip-address: true
 
+name: test
 
 
 

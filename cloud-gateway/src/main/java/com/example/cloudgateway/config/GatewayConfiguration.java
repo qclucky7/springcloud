@@ -2,6 +2,7 @@ package com.example.cloudgateway.config;
 
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
+//import com.example.cloudgateway.filter.TokenFilter;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,7 @@ import java.util.List;
 
 /**
  * @ClassName GatewayConfiguration
- * @Descripion ToDo
+ * @Descripion Gateway集成sentinel配置类
  * @Author wangchen
  * @Date 2019/8/5 9:59
  * @Version 1.0
@@ -41,5 +42,12 @@ public class GatewayConfiguration {
     }
 
     @Bean
-    public GlobalFilter sentinelGatewayFilter() { return new SentinelGatewayFilter(); }
+    public GlobalFilter sentinelGatewayFilter() {
+        return new SentinelGatewayFilter();
+    }
+
+
+    /*@Bean
+    public TokenFilter tokenFilter() { return new TokenFilter(); }*/
+
 }

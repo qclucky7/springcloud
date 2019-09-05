@@ -6,8 +6,11 @@ server:
 eureka:
   instance:
     hostname: eureka03
+    prefer-ip-address: false
+    #表示eureka client发送心跳给server端的频率
+    lease-renewal-interval-in-seconds: 10
+    #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance
+    lease-expiration-duration-in-seconds: 30
   client:
-    register-with-eureka: false
-    fetch-registry: false
     service-url:
       defaultZone: http://eureka01:8686/wangchen/eureka/eureka,http://eureka02:8687/wangchen/eureka/eureka

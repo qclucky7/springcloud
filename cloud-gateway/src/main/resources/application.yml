@@ -13,19 +13,25 @@ spring:
       transport:
         dashboard: localhost:8080 #Sentinel控制台地址
         heartbeat-interval-ms: 1000 #应用与Sentinel控制台的心跳间隔时间
+      datasource:
+        ds:
+          nacos:
+            dataId: ${spring.application.name}-sentinel
+            groupId: DEFAULT_GROUP
+            rule-type: flow
+            data-type: json
+            server-addr: http://10.5.94.32:8848
       scg:
         fallback:
-          #mode: redirect #Spring Cloud Gateway 熔断后的响应模式(选择 redirect or response)
+          mode: redirect #Spring Cloud Gateway 熔断后的响应模式(选择 redirect or response)
           redirect: http://www.baidu.com #Spring Cloud Gateway 响应模式为 'redirect' 模式对应的重定向 URL
           #content-type: Spring Cloud Gateway 响应模式为 'response' 模式对应的 content-type
-          #mode: Spring Cloud Gateway 熔断后的响应模式(选择 redirect or response)
           #response-body: Spring Cloud Gateway 响应模式为 'response' 模式对应的响应内容
           #response-status: Spring Cloud Gateway 响应模式为 'response' 模式对应的响应码  默认429
-
-      #以下配置应该是日志持久化用的
-      #log:
-        #dir: Sentinel 日志文件所在的目录(应该是日志持久化用的)
-        #switch-pid: true Sentinel 日志文件名是否需要带上pid
+      #日志持久化
+      log:
+        dir: E:\logs #Sentinel 日志文件所在的目录(应该是日志持久化用的)
+        switch-pid: true #Sentinel 日志文件名是否需要带上pid
 
       #以下配置不知道是不是和文件上传下载有关
       #metric:
@@ -34,14 +40,43 @@ spring:
         #file-total-count: Sentinel metric 总文件数量
       #冷启动因子(这个对应的应该是限流里面的warm up,监控台网关没有这个配置)
       #flow:
-        #cold-factor:
+        #cold-factor: 3(默认值)
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lowerCaseServiceId: true
+      #discovery:
+        #locator:
+          #enabled: true
+          #lowerCaseServiceId: true
+      #截取路径个数
+      default-filters:
+        - StripPrefix=1
       routes:
         - id: cloud-client-two
-          uri: lb://localhost:8785
+          uri: lb://cloud-client-two
           predicates:
-            - Path=/cloud-client-two/**
+            - Path=/client-two/**
+
+        - id: cloud-client-three
+          uri: lb://cloud-client-three
+          predicates:
+            - Path=/client-three/**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
