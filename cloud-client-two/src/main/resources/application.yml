@@ -24,6 +24,10 @@ spring:
             server-addr: http://10.5.94.32:8848
       servlet:
         block-page: http://localhost:8785/index.html
+      #日志持久化
+      log:
+        dir: E:\logs #Sentinel 日志文件所在的目录(应该是日志持久化用的)
+        switch-pid: true #Sentinel 日志文件名是否需要带上pid
 
 eureka:
   client:

@@ -18,7 +18,8 @@ spring:
           nacos:
             dataId: ${spring.application.name}-sentinel
             groupId: DEFAULT_GROUP
-            rule-type: flow
+            #网关配置rule-type:gw-flow,如果和应用配置一样控制台的网关限流规则不显示。
+            rule-type: gw-flow
             data-type: json
             server-addr: http://10.5.94.32:8848
       scg:
