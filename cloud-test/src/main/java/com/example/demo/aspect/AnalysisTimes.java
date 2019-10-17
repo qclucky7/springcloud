@@ -23,26 +23,18 @@ import java.time.Clock;
 @Component
 public class AnalysisTimes {
 
-    @Pointcut(value = "@annotation(com.example.demo.aspect.AnalysisTime)")
+    @Pointcut("@annotation(com.example.demo.aspect.AnalysisTime)")
     public void analysisTimes(){
 
     }
 
     @Before("analysisTimes()")
-    public void startTime(JoinPoint joinPoint){
-        System.out.println(1111);
-        long millis = Clock.systemDefaultZone().millis();
-        System.out.println(millis);
-        String name = joinPoint.getTarget().getClass().getName();
-        log.info("{}方法开始时间{}",name,millis);
-
+    public void startTime(){
+        System.out.println("执行前");
     }
 
     @After("analysisTimes()")
-    public void endTime(JoinPoint joinPoint){
-
-        long millis = Clock.systemDefaultZone().millis();
-        String name = joinPoint.getTarget().getClass().getName();
-        log.info("{}方法结束时间{}",name,millis);
+    public void endTime(){
+        System.out.println("执行后");
     }
 }

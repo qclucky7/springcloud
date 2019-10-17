@@ -1,6 +1,5 @@
 package com.example.springcloud;
 
-import com.example.demo.aspect.AnalysisTime;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +10,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.zone.ZoneRules;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class SpringcloudApplicationTests {
 
     @Test
-    @AnalysisTime
     public void contextLoads() {
 
         User user = new User();
@@ -66,8 +65,12 @@ public class SpringcloudApplicationTests {
                 .sorted(Comparator.comparing(User::getAge).reversed())
                 .collect(Collectors.partitioningBy(x -> x.getAge() > 20, Collectors.mapping(User::getName, Collectors.toCollection(ArrayList::new))));
         HashMap<Integer, List<User>> collect4 = userArrayList.parallelStream()
-                .sorted(Comparator.comparing(User::getAge).reversed())
+                .sorted(Comparator.comparing(User::getAge).reversed().thenComparing(User::getJob))
                 .collect(Collectors.groupingBy(User::getAge, HashMap::new, Collectors.toCollection(ArrayList::new)));
+
+        HashMap<Integer, List<String>> collect9 = userArrayList.parallelStream()
+                .sorted(Comparator.comparing(User::getAge).reversed())
+                .collect(Collectors.groupingBy(User::getAge, HashMap::new, Collectors.mapping(User::getName, Collectors.toList())));
 
         Map<String, IntSummaryStatistics> collect6 = userArrayList.stream().collect(Collectors.groupingBy(User::getJob, Collectors.summarizingInt(User::getAge)));
         //按工作分组，年龄总和为分组的值
@@ -75,14 +78,13 @@ public class SpringcloudApplicationTests {
         //按工作分组，人数总和为分组的值
         Map<String, Long> collect8 = userArrayList.stream().collect(Collectors.groupingBy(User::getJob, HashMap::new, Collectors.counting()));
 
-
-
         boolean b = userArrayList.stream().anyMatch(x -> x.getAge() == 18 && x.getName().equals("蔡徐坤"));
 
         Optional<User> max3 = userArrayList.stream().max(Comparator.comparing(User::getAge));
 
         Double collect5 = userArrayList.stream().collect(Collectors.averagingInt(User::getAge));
 
+        new ConcurrentHashMap<>();
 
         User first = test.findFirst(userArrayList);
         long count1 = test.getCount(userArrayList);
@@ -145,6 +147,11 @@ public class SpringcloudApplicationTests {
         ZoneRules rules = zoneId.getRules();
         TimeZone zonedefault = TimeZone.getDefault();
 
+        //时间戳转日期
+        DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String dateTimeFormat = dateTimeFormatter1.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(Clock.systemDefaultZone().millis()), ZoneId.systemDefault()));
+
+
         //java8日期格式化。
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
         String format = dateTimeFormatter.format(LocalDate.now());
@@ -175,6 +182,16 @@ public class SpringcloudApplicationTests {
         /*HashSet<String> collect1 = objects.stream().map(String::toUpperCase).collect(Collectors.toCollection(HashSet::new));
         ArrayList<String> collect2 = objects.stream().distinct().map(String::toUpperCase).collect(Collectors.toCollection(ArrayList::new));
         Map<String, List<String>> collect = objects.stream().distinct().map(String::toUpperCase).collect(Collectors.groupingBy(String::new));*/
+
+
+        long userId = 12055;
+        Long userId1 = 12055L;
+
+        if (userId == userId1){
+            System.out.println("1111111111111111111111111111111111111");
+        } else {
+            System.out.println("22222222222222222222222222222222222222");
+        }
 
 
     }

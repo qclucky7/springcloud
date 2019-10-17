@@ -47,7 +47,7 @@ public class ClientTwoTest {
         return data;
     }
 
-    @Value("${name}")
+    @Value("${name1}")
     private String name;
 
     @RequestMapping(value = "/test", method = GET)

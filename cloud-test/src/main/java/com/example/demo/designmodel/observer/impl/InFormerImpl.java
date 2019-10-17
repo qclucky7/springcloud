@@ -16,14 +16,27 @@ import java.util.List;
  */
 public class InFormerImpl implements InFormer {
 
-    private ArrayList<Observer> observers = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
 
-    private ArrayList<Object> observer = new ArrayList<>();
+    private List<Object> observer = new ArrayList<>();
 
     @Override
     public void add(Observer observer) {
         observers.add(observer);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void delete(Observer observer) {

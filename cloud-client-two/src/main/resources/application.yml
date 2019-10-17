@@ -5,6 +5,8 @@ server:
 spring:
   application:
     name: cloud-client-two
+  profiles:
+    active: dev
   cloud:
     #nacos:
       ##使用nacos的配置中心
