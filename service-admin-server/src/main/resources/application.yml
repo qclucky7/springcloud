@@ -1,0 +1,64 @@
+server:
+  port: 8807
+  #servlet:
+    #context-path: /server/timerbox-cloud/admin/
+spring:
+  application:
+    name: service-admin-server
+  profiles:
+      active:
+        - insecure
+# tag::configuration-eureka[]
+eureka:   #<1>
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      # defaultZone: http://cloud-eureka-1:8801/server/timerbox-cloud/eureka/eureka/,http://cloud-eureka-2:8801/server/timerbox-cloud/eureka/eureka/
+      defaultZone: http://localhost:8801/server/timerbox-cloud/eureka/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+# end::configuration-eureka[]
+
+---
+spring:
+  profiles: insecure
+
+---
+spring:
+  profiles: secure
+  security:
+    user:
+      name: "admin"
+      password: "adminTimerbox"
+  mail:
+    host: smtp.qq.com
+    username: 512756007@qq.com
+    password: xzzetbnhanjrbged
+    properties:
+      mail.debug: false
+      mail.smtp.auth: true
+      mail.smtp.port: 465
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.socketFactory: sf
+  boot:
+    admin:
+      notify:
+        mail:
+          to: 13561913@qq.com
+          from: 512756007@qq.com
+eureka:
+  instance:
+    metadata-map:
+      user.name: "admin"         #These two are needed so that the server
+      user.password: "adminTimerbox" #can access the protected client endpoints
