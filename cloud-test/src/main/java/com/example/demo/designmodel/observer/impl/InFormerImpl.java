@@ -25,19 +25,6 @@ public class InFormerImpl implements InFormer {
         observers.add(observer);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public void delete(Observer observer) {
         observers.remove(observer);

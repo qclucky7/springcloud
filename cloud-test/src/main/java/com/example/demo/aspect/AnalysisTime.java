@@ -9,4 +9,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AnalysisTime {
 
+    long value() default 0;
+
+    TimeType type() default TimeType.TIME;
+
 }

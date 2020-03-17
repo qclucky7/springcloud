@@ -1,2 +1,11 @@
 server:
   port: 9999
+
+
+test: 10
+
+
+json-encryption:
+  enabled: true
+
+

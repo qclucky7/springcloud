@@ -3,8 +3,13 @@ package com.example.springcloud;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +21,11 @@ import java.util.stream.Collectors;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureMockMvc
 public class SpringcloudApplicationTests {
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void contextLoads() {
@@ -64,14 +73,19 @@ public class SpringcloudApplicationTests {
                 .distinct()
                 .sorted(Comparator.comparing(User::getAge).reversed())
                 .collect(Collectors.partitioningBy(x -> x.getAge() > 20, Collectors.mapping(User::getName, Collectors.toCollection(ArrayList::new))));
-        HashMap<Integer, List<User>> collect4 = userArrayList.parallelStream()
+        Map<Integer, List<User>> collect4 = userArrayList.parallelStream()
                 .sorted(Comparator.comparing(User::getAge).reversed().thenComparing(User::getJob))
                 .collect(Collectors.groupingBy(User::getAge, HashMap::new, Collectors.toCollection(ArrayList::new)));
 
-        HashMap<Integer, List<String>> collect9 = userArrayList.parallelStream()
+        Map<Integer, List<String>> collect9 = userArrayList.parallelStream()
                 .sorted(Comparator.comparing(User::getAge).reversed())
                 .collect(Collectors.groupingBy(User::getAge, HashMap::new, Collectors.mapping(User::getName, Collectors.toList())));
 
+        //分组求和
+        Map<String, Integer> collect10 = userArrayList.stream().collect(Collectors.groupingBy(User::getName, Collectors.summingInt(User::getAge)));
+
+
+        //IntSummaryStatistics包括很多可用的东西
         Map<String, IntSummaryStatistics> collect6 = userArrayList.stream().collect(Collectors.groupingBy(User::getJob, Collectors.summarizingInt(User::getAge)));
         //按工作分组，年龄总和为分组的值
         Map<String, Integer> collect7 = userArrayList.stream().collect(Collectors.groupingBy(User::getJob, Collectors.summingInt(User::getAge)));
@@ -193,7 +207,22 @@ public class SpringcloudApplicationTests {
             System.out.println("22222222222222222222222222222222222222");
         }
 
+        Map<String, HashSet<String>> map1 = new HashMap<>();
+        map1.computeIfAbsent("fruits", k -> new HashSet<>()).add("apple");
+        map1.computeIfAbsent("fruits", k -> new HashSet<>()).add("orange");
+        map1.computeIfAbsent("fruits", k -> new HashSet<>()).add("pear");
+        map1.computeIfAbsent("meat", k -> new HashSet<>()).add("beef");
+        map1.computeIfAbsent("meat", k -> new HashSet<>()).add("fish");
+        System.out.println(map1);
 
+
+
+    }
+
+    @Test
+    public void test() throws Exception{
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.get("/test")).andReturn().getResponse();
+        System.out.println(response.getContentAsString());
     }
 
 }

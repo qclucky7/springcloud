@@ -15,14 +15,17 @@ import java.util.stream.Collectors;
  */
 public class test {
 
+
     static <T> T findFirst(List<T> list) {
 
         Optional<T> first = list.stream().findFirst();
+
 
         return first.get();
     }
 
     static <T> long getCount(List<T> list) {
+
 
         return list.stream().count();
     }

@@ -2,14 +2,15 @@ package com.example.demo.aspect;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 
-import java.time.Clock;
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.security.acl.LastOwnerException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName AnalysisTime
@@ -18,23 +19,26 @@ import java.time.Clock;
  * @Date 2019/8/27 10:24
  * @Version 1.0
  */
-@Slf4j
 @Aspect
-@Component
-public class AnalysisTimes {
+@Slf4j
+public class AnalysisTimes extends AbstractSentinelAspectSupport{
 
     @Pointcut("@annotation(com.example.demo.aspect.AnalysisTime)")
     public void analysisTimes(){
 
     }
 
-    @Before("analysisTimes()")
-    public void startTime(){
-        System.out.println("执行前");
+
+    @Around("analysisTimes()")
+    public void analysisTimes(ProceedingJoinPoint pjp) throws Throwable {
+
+        AnalysisTime annotation = pjp.getTarget().getClass().getAnnotation(AnalysisTime.class);
+        TimeType type = annotation.type();
+        System.out.println(type.toString());
+        pjp.proceed();
     }
 
-    @After("analysisTimes()")
-    public void endTime(){
-        System.out.println("执行后");
-    }
+
+
+
 }
